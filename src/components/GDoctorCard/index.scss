@@ -1,0 +1,113 @@
+.g-doctor-card {
+  padding: $margin-2;
+  display: flex;
+
+  .avatar {
+    width: 96px;
+    height: 96px;
+    display: inline-block;
+    background: $bg-color-light;
+    border: 1px solid $border-color-light;
+    position: absolute;
+
+    &.round {
+      border-radius: 50%;
+    }
+
+    &.cube {
+      border-radius: 10px;
+    }
+  }
+
+  .info {
+    display: inline-block;
+    margin-left: 119px;
+    // width: 550px;
+
+    &.has-url {
+      width: 515px;
+    }
+
+    .label {
+      font-size: $font-size-xl;
+      font-weight: $font-weight-bold;
+      color: $text-color-dark;
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      // position: relative;
+
+      .level {
+        height: 32px;
+        margin-left: 20px;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-bold;
+        color: $yellow-dark;
+        line-height: 32px;
+        display: inline-flex;
+
+        .icon {
+          width: 32px;
+          height: 34px;
+          z-index: 1;
+        }
+
+        .name {
+          display: inline-block;
+          border: 1px solid $yellow;
+          height: 30px;
+          padding-left: 15px;
+          margin-left: -14px;
+          padding-right: 5px;
+          border-left: 0;
+          background: $yellow-light;
+          border-radius: 6px;
+        }
+      }
+
+      .brief {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 40px;
+        color: $theme-color;
+        font-size: $font-size-sm;
+        border: 1px solid $theme-color;
+        border-radius: $border-radius;
+        white-space: nowrap;
+        padding: 0 4px;
+        position: absolute;
+        right: 0;
+      }
+    }
+
+    .desc {
+      width: 400px;
+      height: 36px;
+      font-size: $font-size-sm;
+      font-weight: 400;
+      color: $text-color;
+      line-height: 37px;
+      word-break: break-all;
+    }
+  }
+
+  .text-middle {
+    color: $text-color-secondary;
+    font-size: $font-size-sm;
+    line-height: 40px;
+    margin-top: 24px;
+
+    &.fixed-height {
+      height: 80px;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+  }
+}
+.card-content{
+  width: 100%;
+  position: relative;
+}

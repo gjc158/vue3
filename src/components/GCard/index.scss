@@ -1,0 +1,99 @@
+div {
+  box-sizing: border-box;
+}
+
+.g-card {
+  width: 100%;
+  background: $bg-color;
+
+  .flex-style {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .card-head-div {
+    width: 100%;
+    padding: 0 $margin-2;
+    height: 130px;
+
+    .title {
+      color: $text-color-dark;
+      font-family: $font-medium;
+      font-size: $font-size-lg;
+      display: flex;
+      align-items: center;
+      position: relative;
+      font-weight: $font-weight-bold;
+
+      &.has-title-active {
+        &:before {
+          content: '';
+          width: 8px;
+          height: 32px;
+          border-top-right-radius: 20px;
+          border-bottom-right-radius: 20px;
+          background-color: $theme-color;
+          position: absolute;
+          left: -40px;
+        }
+      }
+    }
+    .status-span{
+      color: #333;
+      font-size: 26px;
+      font-weight: 500;
+      &.orange{
+        color: #FF9D0B;
+      }
+      &.gray{
+        color: #999999;
+      }
+    }
+  }
+
+  .pic-div {
+    width: 80px;
+    height: 80px;
+    background-color: $bg-color-light;
+    border-radius: 80px;
+  }
+
+  .card-body-div {
+    width: 100%;
+    border-top: 1px solid $border-color;
+
+    .content {
+      padding: 30px 40px;
+    }
+
+    .body-row-div {
+      padding: 15px 0;
+      color: $text-color;
+      font-size: $font-size-md;
+      & > div {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+
+    .row-left {
+      color: $text-color;
+      font-size: $font-size-md;
+    }
+
+    .row-right {
+      color: $text-color-dark;
+      font-size: $font-size-md;
+    }
+  }
+
+  .icon-left {
+    width: 30px;
+    height: 30px;
+    color: $arrow-color;
+    margin-left: 8px;
+  }
+}

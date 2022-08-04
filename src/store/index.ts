@@ -1,30 +1,24 @@
 // store/index.ts
-import { InjectionKey } from 'vue'
-import { createStore, useStore as baseUseStore, Store } from 'vuex'
+import { createStore} from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
 
-export interface State {
-  count: number
-}
+import user from './modules/user'
+import home from './modules/home'
 
-export const key: InjectionKey<Store<State>> = Symbol()
 
-export const store = createStore<State>({
-  state: {
-    count: 0
+export default createStore({
+  modules: {
+    user,
+    home
   },
-  mutations: {
-    setCount(state: State, count: number): void{
-      state.count = count
-    }
-  },
-  getters: {
-    getCount(state: State): number{
-      return state.count
-    }
-  }
+  // 配置插件
+  plugins: [
+    // 默认存储在localStorage上
+    createPersistedState({
+      // 本地存储
+      key: 'test_vuex_state',
+      // 指定需要存储的模块
+      paths: ['user', 'home']
+    })
+  ]
 })
-
-// 定义自己的 `useStore` 组合式函数
-export function useStore() {
-  return baseUseStore(key)
-}

@@ -15,9 +15,10 @@
     "baseUrl": ".",
     "paths": {
       "@/*":["src/*"]
-    }
+    },
+    "types": [ "vite/client" ]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "mock/test.ts"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "mock/test.ts", "src/utils/constant.ts", "src/store/modules/home.js"],
   "references": [{ "path": "./tsconfig.node.json" }],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
 }

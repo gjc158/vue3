@@ -1,95 +1,136 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import { IdefaultObject } from "./type";
-import { whichType } from "../common";
-const http = axios.create({
-  baseURL: (import.meta.env.VITE_BASE_API as string | undefined) || "/api",
-  timeout: 10000, //  超时时间 单位是ms，这里设置了10s的超时时间
-});
+import axios, { AxiosResponse } from 'axios'
+import { errorCodeType } from '@/utils/server/error-code-type'
+import { Toast } from 'vant'
+import store from '@/store/index'
 
-export const defaultErrInfo: IdefaultObject = { status: -1, error_message: '接口请求失败', code: 1 }
+console.info(store)
+// 创建axios实例
+const service = axios.create({
+  // 服务接口请求
+  baseURL: '/',
+  // 超时设置
+  timeout: 15000,
+  headers: { 
+    'Content-Type': 'application/json;charset=utf-8',
+    'Authorization': ''
+  }
+})
+
+let loading: any;
+//正在请求的数量
+let requestCount: number = 0
+//显示loading
+const showLoading = () => {
+  if (requestCount === 0 && !loading) {
+    loading = Toast.loading({
+      message: '加载中...',
+      forbidClick: true,
+    });
+  }
+  requestCount++;
+}
+//隐藏loading
+const hideLoading = () => {
+  requestCount--
+  if (requestCount == 0) {
+    loading.clear()
+  }
+}
 
 // 请求拦截
-http.interceptors.request.use(
-  (conflg: AxiosRequestConfig) => {
-    if (whichType(conflg) === "object") {
-      // 如果有token 就携带tokon
-      const token = window.localStorage.getItem("accessToken");
-      if (token && conflg.headers) {
-        // 自定义令牌的字段名X-Token
-        conflg.headers["X-Token"] = token;
+service.interceptors.request.use((config: any) => {
+  showLoading()
+  // 是否需要设置 token
+  // config.headers['Authorization'] = 'Bearer ' + getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
+  const token = store.getters['user/getUserToken']
+  // get请求映射params参数
+  if (config.method === 'get' && config.params) {
+    let url = config.url + '?';
+    for (const propName of Object.keys(config.params)) {
+      const value = config.params[propName];
+      var part = encodeURIComponent(propName) + "=";
+      if (value !== null && typeof (value) !== "undefined") {
+        if (typeof value === 'object') {
+          for (const key of Object.keys(value)) {
+            let params = propName + '[' + key + ']';
+            var subPart = encodeURIComponent(params) + "=";
+            url += subPart + encodeURIComponent(value[key]) + "&";
+          }
+        } else {
+          url += part + encodeURIComponent(value) + "&";
+        }
       }
-      return conflg;
-    } else {
-      return defaultErrInfo;
     }
-  },
-  err => {
-    console.log(err);
-    return err;
-  }
-);
+    url = url.slice(0, -1);
+    config.params = {};
+    if (token) {
+      config.params['token'] = token
+    }
+    config.url = url;
+  } else{
+    const _timestamp = +new Date() + ''
+    // 注入token
+    if (token) {
+      // config.headers['Authorization'] = 'bearer ' + token
+      config.headers['Authorization'] = token
+      config.data['sessionId'] = token
+    }
 
-// 响应拦截
-http.interceptors.response.use(
-  (conflg: AxiosResponse<any>) => {
-    if (whichType(conflg) === "object") {
-      return conflg;
-    } else {
-      return defaultErrInfo;
+    if (config.method === 'post') {
+      config.data['appId'] = import.meta.env.VITE_APP_APPID
+      // config.data['deviceId'] = import.meta.env.VITE_APP_DEVICEID || ''
+      config.data['encryptType'] = import.meta.env.VITE_APP_ENCRYPTTYPE || ''
+      // config.data['sign'] = import.meta.env.VITE_APP_SIGN || ''
+      config.data['signType'] = import.meta.env.VITE_APP_SIGNTYPE || ''
+      config.data['termType'] = import.meta.env.VITE_APP_TERMTYPE || ''
+      config.data['timestamp'] = _timestamp
+      config.data['version'] = import.meta.env.VITE_APP_VERSION || ''
     }
-  },
-  (err) => {
-    if (err && err.response) {
-      switch (err.response.status) {
-        case 400:
-          console.log("客户端请求的语法错误，服务器无法理解");
-          break;
-        case 401:
-          console.log("身份验证出错");
-          break;
-        case 403:
-          console.log("服务器理解请求客户端的请求，但是拒绝执行此请求");
-          break;
-        case 404:
-          console.log(`请求地址出错:${err.response.config.url}`);
-          break;
-        case 405:
-          console.log("请求方式被禁止");
-          break;
-        case 408:
-          console.log("请求超时");
-          break;
-        case 500:
-          console.log("服务器内部错误，无法完成请求");
-          break;
-        case 501:
-          console.log(" 服务器不支持请求的功能，无法完成请求");
-          break;
-        case 502:
-          console.log(
-            "作为网关或者代理工作的服务器尝试执行请求时，从远程服务器接收到了一个无效的响应"
-          );
-          break;
-        case 503:
-          console.log(
-            "由于超载或系统维护，服务器暂时的无法处理客户端的请求。延时的长度可包含在服务器的Retry-After头信息中"
-          );
-          break;
-        case 504:
-          console.log("充当网关或代理的服务器，未及时从远端服务器获取请求");
-          break;
-        case 505:
-          console.log("服务器不支持请求的HTTP协议的版本");
-          break;
-        default:
-          console.log(`请求出错:${err.message}`);
+    if (config.method === 'get') {
+      if (token) {
+        config.params['token'] = token
       }
-      return err.response;
-    } else {
-      console.log("服务器连接失败");
-      return defaultErrInfo;
     }
   }
-);
+  return config
+}, error => {
+  console.log(error)
+  Promise.reject(error)
+})
 
-export default http;
+// 响应拦截器
+service.interceptors.response.use((res: AxiosResponse) => {
+  hideLoading()
+  // 未设置状态码则默认成功状态
+  const code = res.data['respCode'] || res.data['code'];
+  // 获取错误信息
+  const msg = res.data['respMsg'] || errorCodeType(code) || errorCodeType(0)
+  if (code === '000000') {
+    return Promise.resolve(res.data.param as any)
+  } else {
+    Toast.fail(msg)
+    return Promise.reject(res.data)
+  }
+},
+  error => {
+    console.log('err' + error)
+    hideLoading()
+    let { message } = error;
+    if (message == "Network Error") {
+      message = "后端接口连接异常";
+    }
+    else if (message.includes("timeout")) {
+      message = "系统接口请求超时";
+    }
+    else if (message.includes("Request failed with status code")) {
+      message = "系统接口" + message.substr(message.length - 3) + "异常";
+    }
+    Toast.fail({
+      message: message,
+      duration: 2 * 1000
+    })
+    return Promise.reject(error)
+  }
+)
+
+export default service

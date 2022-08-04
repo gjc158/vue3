@@ -1,0 +1,120 @@
+.g-doctor-list-item {
+  background: $bg-color;
+  padding: 0 $margin-2;
+
+  &:last-child {
+    .doctor-item {
+      border-bottom: 0;
+    }
+  }
+
+  .doctor-item {
+    width: 100%;
+    padding: $margin-2 0;
+    border-bottom: 1px solid $border-color;
+    display: flex;
+
+    .avatar {
+      width: 96px;
+      height: 96px;
+      display: inline-block;
+      background: $bg-color-light;
+      border: 1px solid $border-color-light;
+
+      &.round {
+        border-radius: 50%;
+      }
+
+      &.cube {
+        border-radius: 10px;
+      }
+    }
+
+    .info {
+      display: inline-block;
+      margin-left: 20px;
+      width: 560px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      
+      &.has-url {
+        width: 515px;
+      }
+
+      .label {
+        font-size: $font-size-xl;
+        font-weight: $font-weight-bold;
+        color: $text-color-dark;
+        display: flex;
+        align-items: center;
+        margin-bottom: 4px;
+        position: relative;
+
+        .level {
+          height: 32px;
+          margin-left: 20px;
+          font-size: $font-size-xs;
+          font-weight: $font-weight-bold;
+          color: $yellow-dark;
+          line-height: 32px;
+          display: inline-flex;
+
+          .icon {
+            width: 32px;
+            height: 34px;
+            z-index: 1;
+          }
+
+          .name {
+            display: inline-block;
+            border: 1px solid $yellow;
+            height: 30px;
+            padding-left: 15px;
+            margin-left: -14px;
+            padding-right: 5px;
+            border-left: 0;
+            background: $yellow-light;
+            border-radius: 6px;
+          }
+        }
+
+        .price {
+          height: 40px;
+          font-size: $font-size-md;
+          font-weight: 400;
+          color: $text-color;
+          line-height: 40px;
+          position: absolute;
+          right: 0px;
+        }
+      }
+
+      .desc {
+        width: 100%;
+        height: 36px;
+        font-size: $font-size-sm;
+        font-weight: 400;
+        color: $text-color-secondary;
+        line-height: 37px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-break: break-all;
+      }
+    }
+
+    .arrow {
+      width: 50px;
+      margin-left: 30px;
+      display: flex;
+      align-items: center;
+      
+      .nav-icon {
+        width: 16px;
+        height: 26px;
+        color: $arrow-color;
+      }
+    }
+  }
+}

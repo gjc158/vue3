@@ -1,0 +1,44 @@
+.subscribe-list {
+    background-color: $bg-color-light;
+
+    .skeleton-placeholder {
+      margin: $margin-2;
+    }
+    :deep(.van-tabs__line){
+      background-color: rgba(57, 151, 244, 0.9);
+      width: 50px !important;
+      height: 6px;
+      margin-bottom: 0;
+    }
+    :deep(.van-tabs){
+      display: inline-block !important;
+      .van-tabs__wrap{
+        .van-tab{
+          text-align: center;
+          flex: 1;
+          margin-right: 0;
+          font-size: 28px;
+          font-weight: 400;
+          color: #999999;
+          line-height: 40px;
+        }
+        .van-tab--active{
+          font-size: 30px;
+          font-weight: 500;
+          color: #222222;
+          line-height: 42px;
+        }
+      }
+    }
+    :deep(.van-tabs--line .van-tabs__wrap){
+      border-bottom: 2px solid #F5F5F5;
+      height: 120px;
+      padding-left: 0;
+    }
+  }
+
+  .normal-text {
+    font-size: 26px;
+    color: $text-color-secondary;
+    font-family: $font-medium;
+  }

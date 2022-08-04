@@ -1,0 +1,17 @@
+// 腾讯地图样式重置
+#map {
+  height: 420px;
+  z-index: 9;
+  // 底部水印隐藏
+  > div {
+    > div:nth-child(2){
+        > div{
+            display: none;
+        }
+    }
+  }
+  // 缩放组件
+  .zoom-control {
+    display: none;
+  }
+}

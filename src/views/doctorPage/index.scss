@@ -1,0 +1,118 @@
+div {
+  box-sizing: border-box;
+}
+
+.doctor-page {
+  background-color: $bg-color-light;
+  
+  & > div {
+    background-color: $white;
+  }
+
+  .flex-row-style {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .list-div {
+    width: 100%;
+    padding-left: $margin-2;
+
+    .list-row {
+      width: 100%;
+      padding: $margin-2 0;
+      border-bottom: 1px solid $bg-color-light;
+      padding-right: $margin-2;
+      justify-content: space-between;
+
+      .status-style {
+        width: 110px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid $grey;
+        border-radius: 4px;
+        background-color: $grey-light;
+        color: $text-color-secondary;
+        font-size: $font-size-sm;
+      }
+
+      .normal-text {
+        font-size: $font-size-md;
+        color: $text-color-secondary;
+        font-family: $font-medium;
+        line-height: 42px;
+
+        &.smaller-font {
+          font-size: $font-size-md;
+        }
+      }
+
+      .margin-bottom-style {
+        margin-bottom: 16px;
+      }
+
+      .time-box {
+        width: 100px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $theme-color;
+        font-size: $font-size-sm;
+        border: 1px solid $theme-color;
+        border-radius: 4px;
+        margin-right: 24px;
+      }
+
+      &.active {
+        .normal-text {
+          color: $text-color;
+        }
+
+        .status-style {
+          color: $white;
+          background-color: $theme-color;
+          border-color: $theme-color;
+        }
+      }
+    }
+  }
+
+  .schedule-time {
+    display: grid;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    grid-template-columns: repeat(auto-fill, 48%);
+    grid-row-gap: 24px;
+    grid-column-gap: 26px;
+    padding-bottom: 20px;
+    padding: 0 20px;
+
+    .item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 23px 0;
+      background: $bg-color;
+      border-radius: $border-radius;
+      border: 1px solid $border-color-light;
+      font-size: $font-size-lg;
+      font-weight: 500;
+      color: $text-color;
+      &.active{
+        background: rgba(49, 134, 255, 0.04);
+        border: 1px solid #3186FF;
+        color: #3186FF;
+      }
+      &.disable {
+        background: #FAFAFA;
+        color: #999999;
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="44px" height="44px" viewBox="0 0 44 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59.1 (86144) - https://sketch.com -->
+    <title>图标/44px/预约挂号</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="17.0922754%" y1="13.8138003%" x2="82.8266939%" y2="85.8877899%" id="linearGradient-1">
+            <stop stop-color="#F7C51B" offset="0%"></stop>
+            <stop stop-color="#F9AF11" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="图标/44px/预约挂号" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g>
+            <rect id="矩形" fill="#D8D8D8" opacity="0" x="0" y="0" width="44" height="44"></rect>
+            <path d="M22,2 C33.028,2 42,10.972 42,22 C42,33.028 33.028,42 22,42 C10.972,42 2,33.028 2,22 C2,10.972 10.972,2 22,2 Z M22,6 C13.178,6 6,13.178 6,22 C6,30.822 13.178,38 22,38 C30.822,38 38,30.822 38,22 C38,13.178 30.822,6 22,6 Z M23.9996,13.0004 L23.9996,20.8454 L29.9326,24.2704 L27.9326,27.7344 L19.9996,23.1544 L19.9996,13.0004 L23.9996,13.0004 Z" id="预约挂号" fill="url(#linearGradient-1)"></path>
+        </g>
+    </g>
+</svg>

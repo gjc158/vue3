@@ -1,0 +1,132 @@
+div {
+  box-sizing: border-box;
+}
+
+.reserve-information {
+  background-color: $border-color;
+  min-height: 100%;
+
+  .head-div {
+    width: 100%;
+    height: 288px;
+    margin-bottom: 20px;
+    background-color: $white;
+
+    .bg {
+      width: 100%;
+      height: 100%;
+      background: url('@/assets/images/bg-head.png') right 0 no-repeat;
+      background-size: contain;
+      padding: $margin-2;
+      padding-bottom: 0;
+
+      .title {
+        font-size: $font-size-xxl;
+        color: $text-color-dark;
+        line-height: 56px;
+        font-family: $font-medium;
+      }
+
+      .tips {
+        width: 100%;
+        height: 80px;
+        margin-top: 24px;
+        color: $text-color;
+        font-size: $font-size-sm;
+        line-height: 40px;
+      }
+    }
+  }
+
+  .third-div {
+    padding: 0 0 0 $margin-2;
+  }
+
+  .fourth-div {
+    padding: $margin-2;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: $white;
+  }
+
+  .btn-style {
+    width: 100%;
+    height: 100px;
+    background-color: $grey-light;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $grey;
+    color: $grey-dark;
+    font-size: $font-size-xl;
+    border-radius: 10px;
+
+    &.active {
+      background-color: $theme-color;
+      color: $white;
+    }
+  }
+
+  .must-know-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: $margin-2;
+
+    .text-style {
+      color: $text-color-secondary;
+      font-size: $font-size-sm;
+      margin-left: 16px;
+    }
+
+    .blue-color {
+      color: $theme-color;
+    }
+  }
+
+  .slot-style {
+    color: $text-color-dark;
+    font-size: $font-size-md;
+  }
+
+  .icon-left-style{
+    color: $arrow-color;
+    font-size: $font-size-md;
+    margin-left: 8px;
+  }
+}
+.edit-input{
+  border: none; 
+  outline: none;
+  text-align: right;
+}
+.popPage{
+  :deep(.content){
+    padding: 0 40px;
+  }
+  .item{
+    padding: 35px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 28px;
+    color: #666666;
+    position: relative;
+    border-bottom: 1px solid #ebedf0;
+    line-height: 60px;
+    .active{
+      color: #3997F4;
+    }
+    .name{
+      flex: 1;
+    }
+  }
+  .icon-checked{
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+  }
+}

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { store, useStore } from '@/store'
+import { useStore } from 'vuex'
 import http from '../utils/server'
 try {
   let data =  http.get({url: 'getUsers'})
@@ -8,14 +8,15 @@ try {
 } catch(error) {
   console.log('Error loading server', error)
 }
-
-const count = ref(0)
+const store = useStore()
+console.info(store)
+const count = ref(store.getters["home/getCount"])
 const showCount = computed(() => {
-  return store.getters.getCount
+  return store.getters["home/getCount"]
 })
 const addButton = () => {
   count.value++
-  store.commit('setCount', count.value)
+  store.commit('home/setCount', count.value)
 }
 // fetch("/api/getUsers")
 //   .then(response => {
@@ -31,6 +32,7 @@ const addButton = () => {
   <h2>{{ showCount }}</h2>
   <button type="button" @click="addButton">点我加1</button>
   <van-button type="success">主要按钮</van-button>
+  
 </template>
 
 <style scoped>
